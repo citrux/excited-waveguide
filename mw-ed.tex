@@ -1,11 +1,88 @@
-\documentclass[a4paper,14pt]{extarticle}
+\documentclass[a4paper,12pt]{extarticle}
 \usepackage[margin=1.5cm]{geometry}
 \usepackage[russian]{babel}
 \usepackage[utf8]{inputenc}
 \usepackage{tikz}
 \usepackage{hedmaths}
+
+\renewcommand{\small}{\fontsize{12pt}{14.4pt}\selectfont}
+\usepackage{caption}
+\DeclareCaptionLabelFormat{figure}{Рисунок #2}
+\DeclareCaptionLabelFormat{table}{Таблица #2}
+\DeclareCaptionLabelSeparator{sep}{~---~}
+\captionsetup{labelsep=sep,justification=centering,font=small}
+\captionsetup[figure]{labelformat=figure}
+\captionsetup[table]{labelformat=table}
+
+\usepackage{titlesec}
+\titleformat{\section}
+    {\centering\normalsize}
+    {\thesection}
+    {1em}{}
+\titleformat{\subsection}
+    {\centering\normalsize}
+    {\thesubsection}
+    {1em}{}
+\titleformat{\subsubsection}
+    {\centering\normalsize}
+    {\thesubsubsection}
+    {1em}{}
+
+\titlespacing*{\section}{\parindent}{*4}{*1}
+\titlespacing*{\subsection}{\parindent}{*4}{*1}
+\titlespacing*{\subsubsection}{\parindent}{*4}{*1}
+
+\renewcommand{\tan}{\mathrm{tg\,}}
+\renewcommand{\baselinestretch}{1.5}
+
+\parindent=1.25cm
+\usepackage{enumitem}
+\makeatletter
+\AddEnumerateCounter{\asbuk}{\@asbuk}{м)}
+\makeatother
+\setlist{nosep,wide}
+
+\tolerance=10000
+
 \begin{document}
+	\begin{titlepage}
+        \begin{center}
+          Министерство образования и науки Российской Федерации \\
+          Федеральное государственное бюджетное образовательное \\
+          учреждение высшего профессионального образования \\
+          <<Волгоградский государственный технический университет>> \\
+          Факультет электроники и вычислительной техники\\
+          Кафедра <<Физика>>
+        \end{center}
+        \vspace{9em}
+        \begin{center}
+          \large
+          Семестровая работа
+		  по дисциплине\\
+		  <<Электродинамика СВЧ>>\\
+        \end{center}
+        \vspace{5em}
+        \begin{flushright}
+          \begin{minipage}{.40\textwidth}
+            Выполнил:\\
+            студент группы Ф-1н\\
+            Абдрахманов В. Л.\\
+            \vspace{1em}\\
+            Проверил:\\
+            к.ф.-м.н., доцент\\
+            Грецов М. В.
+          \end{minipage}
+        \end{flushright}
+        \vspace{\fill}
+        \begin{center}
+          Волгоград, \the\year
+        \end{center}
+    \end{titlepage}
+    \setcounter{page}{2}
+	\emph{
 	Прямоугольный волновод 23\(\times\)10 мм, закороченный в сечении z=0 возбуждается тонким штырём длины \( l \)= 8 мм, введённым через широкую стенку параллельно узкой стенке и расположенным в \( z_0 \) = 15 мм, \( x_0 \) = 10 мм. Амплитуда тока в штыре \( I_0 \)= 2 А, частота \( f \) = 17 ГГц. Рассчитать спектр типов волн и их амплитудные коэффициенты (отношение максимальной амплитуды к минимальной 20, моды с меньшей амплитудой не учитывать), а также рассчитать распределение мощности в поперечном сечении волновода и мощность, переносимую в волноводе.
+	}
+	\vspace*{1cm}
 
 	Для начала, определим какие вообще волны могут распространяться в волноводе на этой частоте:
 	\[
@@ -135,7 +212,7 @@
 		A_{\pm 5} =  \pm i\frac{I_0}{4\frac{ab}{8}\frac{\omega\eps h_5 E_0^2}{g_{11}^2}}\frac{h_5\pi}{g_{11}^2b}E_0\sin\frac{\pi x_0}{a}\frac{b}{\pi}\sin\frac{\pi l}{b}e^{\pm ih_5z_0} = \pm i \frac{2I_0}{ab\omega\eps E_0} \sin\frac{\pi x_0}{a}\sin\frac{\pi l}{b}e^{\pm ih_5z_0}.
 	\]
 
-	Волны идущие влево полностью отразятся на закоротке. Коэффициенты отражённых волн можно найти из граничных условий на поперечные компоненты электрического поля при \( z_0 \):
+	Волны идущие влево полностью отразятся на закоротке. Коэффициенты отражённых волн можно найти из граничных условий на поперечные компоненты электрического поля при \( z=0 \):
 	\[
 		A_k^r = \begin{cases}
 			-A_{-k}, k=\overline{1,4},\\
@@ -151,9 +228,9 @@
 	Подставив конкретный вид, получим
 	\begin{align*}
 		& B_1 = -i\frac{I_0}{ab h_1 H_0} \frac{\pi l}{a}\sin\frac{\pi x_0}{a}(e^{ih_1z_0}  - e^{-ih_1z_0}) = \frac{2I_0}{ab h_1 H_0} \frac{\pi l}{a}\sin\frac{\pi x_0}{a}\sin(h_1z_0),\\
-		& B_2 = \frac{2I_0}{ab h_2 H_0} \frac{2\pi l}{a}\sin\frac{2\pi x_0}{a}\sin(h_2z_0),
-		& B_4 = \frac{4I_0}{ab h_4 H_0} \frac{b}{a}\sin\frac{\pi x_0}{a}\sin\frac{\pi l}{b}\sin(h_4z_0),
-		& B_5 = \frac{4I_0}{ab\omega\eps E_0} \sin\frac{\pi x_0}{a}\sin\frac{\pi l}{b}\sin(h_5z_0).
+		& B_2 = \frac{2I_0}{ab h_2 H_0} \frac{2\pi l}{a}\sin\frac{2\pi x_0}{a}\sin(h_2z_0),\\
+		& B_4 = \frac{4I_0}{ab h_4 H_0} \frac{b}{a}\sin\frac{\pi x_0}{a}\sin\frac{\pi l}{b}\sin(h_4z_0),\quad
+		B_5 = \frac{4I_0}{ab\omega\eps E_0} \sin\frac{\pi x_0}{a}\sin\frac{\pi l}{b}\sin(h_5z_0).
 	\end{align*}
 
 	Определим мощности \( P_k \), переносимые волнами:
@@ -167,7 +244,6 @@
 		\frac{h_5}{g_{11}^2} \frac{2I_0^2}{ab\omega\eps} \left[\sin\frac{\pi x_0}{a}\sin\frac{\pi l}{b}\sin(h_5z_0)\right]^2.
 	\end{align*}
 
-	Сведём результаты в таблицу:
 	\begin{table}[h]
 		\center
 		\caption{Спектр волн в волноводе}
@@ -179,4 +255,25 @@
 		$E_{11}$ & 97 & 9,9 \\ \hline
 		\end{tabular}
 	\end{table}
+
+	Полная мощность, переносимая в волноводе
+	\[
+		P = P_1 + P_2 + P_4 + P_5 = 450~\text{Вт}.
+	\]
+
+	\begin{figure}[h]
+		\center
+		\includegraphics[width=.8\textwidth]{spectrum}
+		\caption{Спектральный состав излуения в волноводе}
+	\end{figure}
+	
+	\begin{figure}
+		\includegraphics[width=.5\textwidth]{15}\hfil
+		\includegraphics[width=.5\textwidth]{19}
+		\includegraphics[width=.5\textwidth]{27}\hfil
+		\includegraphics[width=.5\textwidth]{34}
+		\includegraphics[width=.5\textwidth]{40}\hfil
+		\includegraphics[width=.5\textwidth]{47}
+		\caption{Распределение мощности в поперечном сечении}
+	\end{figure}
 \end{document}
